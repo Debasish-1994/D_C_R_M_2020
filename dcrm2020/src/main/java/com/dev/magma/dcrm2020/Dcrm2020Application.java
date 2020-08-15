@@ -9,5 +9,4 @@ public class Dcrm2020Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Dcrm2020Application.class, args);
 	}
-
 }
