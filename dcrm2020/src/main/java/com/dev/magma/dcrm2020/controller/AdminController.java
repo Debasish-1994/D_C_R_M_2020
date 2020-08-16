@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.magma.dcrm2020.model.CompanyDetails;
-import com.dev.magma.dcrm2020.repository.SuperAdminRepository;
+import com.dev.magma.dcrm2020.repository.CompanyDetailsRepository;
 
 
 @RestController
 @RequestMapping("/admin/v0")
 public class AdminController {
 	@Autowired
-	SuperAdminRepository superAdminRepository;
+	CompanyDetailsRepository companyDetailsRepository;
 
 	@RequestMapping(value = "/getalluser", method = RequestMethod.POST)
 	public List<CompanyDetails> getUserDetails() {
-		return superAdminRepository.findAll();
+		return companyDetailsRepository.findAll();
 	}
 
 	@RequestMapping(value = "/adduserdetails", method = RequestMethod.POST)
 	public CompanyDetails createUser(@RequestBody CompanyDetails companyDetails) {
-		return superAdminRepository.save(companyDetails);
+		return companyDetailsRepository.save(companyDetails);
 	}
 
 	@RequestMapping(value = "/getbyid", method = RequestMethod.POST)

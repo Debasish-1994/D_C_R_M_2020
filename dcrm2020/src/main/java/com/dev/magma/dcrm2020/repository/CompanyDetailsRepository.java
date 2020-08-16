@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.dev.magma.dcrm2020.model.CompanyDetails;
 
 
-public interface SuperAdminRepository extends JpaRepository<CompanyDetails, Long>{
+public interface CompanyDetailsRepository extends JpaRepository<CompanyDetails, Long>{
 
 }
