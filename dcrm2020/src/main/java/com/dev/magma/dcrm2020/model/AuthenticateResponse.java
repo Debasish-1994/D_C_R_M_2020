@@ -3,9 +3,6 @@ package com.dev.magma.dcrm2020.model;
 import java.io.Serializable;
 
 public class AuthenticateResponse implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private UserDetails userDetails;
 	private CompanyDetails companyDetails;
