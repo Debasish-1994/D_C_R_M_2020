@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,22 @@ public class AdminController_v1 {
 		}
 		return ResponseEntity.status(200).body(dataResponse);
 	}
+	
+	@PutMapping(value = "/UserById/{id}")
+	public  ResponseEntity<?> updateUser(@PathVariable(value = "id") Integer id,@RequestBody AllDataResponse allDataResponse){
+		@SuppressWarnings("unused")
+		AllDataResponse allDataResponse1;
+		Map<String, Boolean> response = null;
+		Optional<AllDataResponse> dataResponse1 = superAdminRepository_v1.findById(id);
+		if (dataResponse1.isPresent()) {
+			System.out.println("Update :"+dataResponse1.get());
+			allDataResponse1 = dataResponse1.get();
+			superAdminRepository_v1.save(id);
+			response = new HashMap<String, Boolean>();
+			response.put("updated", Boolean.TRUE);
+		}
+		return ResponseEntity.ok(dataResponse1);	
+		}
 
 	@DeleteMapping("/deleteUserById/{id}")
 	public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Integer id) {

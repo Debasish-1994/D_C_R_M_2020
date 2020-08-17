@@ -26,6 +26,6 @@ public class LoginController {
 	@RequestMapping(value = "/newlogin", method = RequestMethod.POST)
 	public ResponseEntity<?> newUserLogin(@RequestBody AuthenticationRequest authenticationRequest) {
 		userServiceImpl.save(authenticationRequest);
-		return ResponseEntity.ok("working");
+		return ResponseEntity.ok("User Successfully Loged In!");
 	}
 }
