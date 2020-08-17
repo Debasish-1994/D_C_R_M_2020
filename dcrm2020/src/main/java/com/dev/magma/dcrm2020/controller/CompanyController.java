@@ -79,5 +79,4 @@ public class CompanyController {
 		}
 		return response;
 	}
-
 }

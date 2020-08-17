@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.magma.dcrm2020.model.AllDataResponse;
+import com.dev.magma.dcrm2020.model.CompanyDetails;
 import com.dev.magma.dcrm2020.repository.SuperAdminRepository_v1;
 
 @RestController
@@ -29,6 +30,25 @@ public class AdminController_v1 {
 		return superAdminRepository_v1.findAll();
 	}
 
+	@RequestMapping(value = "/getalluserbyid/{id}", method = RequestMethod.POST)
+	public Optional<AllDataResponse> getUserDetailsById(@PathVariable(value = "id") Integer id) {
+		Optional<AllDataResponse> getDetails = superAdminRepository_v1.findById(id);
+		System.out.println(getDetails);
+		return getDetails;
+	}
+
+	@RequestMapping(value = "/updateuserbyid/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateUser(@PathVariable(value = "id") Integer id,@RequestBody AllDataResponse allDataResponse) {
+		System.out.println(id);
+		System.out.println(allDataResponse);
+		Optional<AllDataResponse> getDetails = superAdminRepository_v1.findById(id);
+		if (!getDetails.isPresent())
+			return ResponseEntity.notFound().build();
+		allDataResponse.setId(id);
+		superAdminRepository_v1.save(allDataResponse);
+		return ResponseEntity.noContent().build();
+	}
+	
 	@RequestMapping(value = "/addalldetails", method = RequestMethod.POST)
 	public ResponseEntity<?> createAllUser(@RequestBody AllDataResponse allDataResponse) {
 		AllDataResponse dataResponse = null;
@@ -40,22 +60,7 @@ public class AdminController_v1 {
 		}
 		return ResponseEntity.status(200).body(dataResponse);
 	}
-	
-	@PutMapping(value = "/UserById/{id}")
-	public  ResponseEntity<?> updateUser(@PathVariable(value = "id") Integer id,@RequestBody AllDataResponse allDataResponse){
-		@SuppressWarnings("unused")
-		AllDataResponse allDataResponse1;
-		Map<String, Boolean> response = null;
-		Optional<AllDataResponse> dataResponse1 = superAdminRepository_v1.findById(id);
-		if (dataResponse1.isPresent()) {
-			System.out.println("Update :"+dataResponse1.get());
-			allDataResponse1 = dataResponse1.get();
-			superAdminRepository_v1.save(id);
-			response = new HashMap<String, Boolean>();
-			response.put("updated", Boolean.TRUE);
-		}
-		return ResponseEntity.ok(dataResponse1);	
-		}
+
 
 	@DeleteMapping("/deleteUserById/{id}")
 	public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Integer id) {
