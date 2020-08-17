@@ -23,6 +23,14 @@ public class CompanyDetails implements Serializable {
 	@Column(name = "logo_url")
 	private String logo;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getCompanyName() {
 		return companyName;
 	}
