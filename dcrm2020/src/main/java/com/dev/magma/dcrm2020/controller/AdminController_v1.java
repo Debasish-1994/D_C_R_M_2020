@@ -3,9 +3,11 @@ package com.dev.magma.dcrm2020.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,9 +47,21 @@ public class AdminController_v1 {
 		if (!getDetails.isPresent())
 			return ResponseEntity.notFound().build();
 		allDataResponse.setId(id);
-		superAdminRepository_v1.save(allDataResponse);
+		
 		return ResponseEntity.noContent().build();
 	}
+	
+	/*
+	 * @SuppressWarnings("unused")
+	 * 
+	 * @PutMapping("/updatebyid/{id}") public ResponseEntity<?> update(@RequestBody
+	 * AllDataResponse allDataResponse, @PathVariable Integer id) { try {
+	 * Optional<AllDataResponse> getDetails = superAdminRepository_v1.findById(id);
+	 * superAdminRepository_v1.save(allDataResponse);
+	 * System.out.println(allDataResponse); return new
+	 * ResponseEntity<>(HttpStatus.OK); } catch (NoSuchElementException e) { return
+	 * new ResponseEntity<>(HttpStatus.NOT_FOUND); } }
+	 */
 	
 	@RequestMapping(value = "/addalldetails", method = RequestMethod.POST)
 	public ResponseEntity<?> createAllUser(@RequestBody AllDataResponse allDataResponse) {

@@ -6,5 +6,7 @@ import com.dev.magma.dcrm2020.model.AllDataResponse;
 
 
 public interface SuperAdminRepository_v1 extends JpaRepository<AllDataResponse, Integer> {
+
+	
 	
 }
