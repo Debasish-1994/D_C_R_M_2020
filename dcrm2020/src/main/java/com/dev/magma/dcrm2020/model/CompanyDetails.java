@@ -44,18 +44,18 @@ public class CompanyDetails implements Serializable {
 	@Column(name = "company_owneravatar")
 	private String companyOwnerAvatar;
 
-	@Column(name = "ismodule1flagactivated", columnDefinition = "varchar(1) default 'N'")
-	private String isModule1Flag;
-	@Column(name = "ismodule2flagactivated", columnDefinition = "varchar(1) default 'N'")
-	private String isModule2Flag;
-	@Column(name = "ismodule3flagactivated", columnDefinition = "varchar(1) default 'N'")
-	private String isModule3Flag;
-	@Column(name = "ismodule4flagactivated", columnDefinition = "varchar(1) default 'N'")
-	private String isModule4Flag;
-	@Column(name = "ismodule5flagactivated", columnDefinition = "varchar(1) default 'N'")
-	private String isModule5Flag;
-	@Column(name = "ismodule6flagactivated", columnDefinition = "varchar(6) default false")
-	private boolean isModule6Flag;
+	@Column(name = "ismodule1flagactivated", columnDefinition = "int default 0")
+	private boolean module1Flag;
+	@Column(name = "ismodule2flagactivated", columnDefinition = "int default 0")
+	private boolean module2Flag;
+	@Column(name = "ismodule3flagactivated", columnDefinition = "int default 0")
+	private boolean module3Flag;
+	@Column(name = "ismodule4flagactivated", columnDefinition = "int default 0")
+	private boolean module4Flag;
+	@Column(name = "ismodule5flagactivated", columnDefinition = "int default 0")
+	private boolean module5Flag;
+	@Column(name = "ismodule6flagactivated", columnDefinition = "int default 0")
+	private boolean module6Flag;
 
 	public CompanyDetails() {
 	}
@@ -164,52 +164,52 @@ public class CompanyDetails implements Serializable {
 		this.companyOwnerAvatar = companyOwnerAvatar;
 	}
 
-	public String getIsModule1Flag() {
-		return isModule1Flag;
+	public boolean isModule1Flag() {
+		return module1Flag;
 	}
 
-	public void setIsModule1Flag(String isModule1Flag) {
-		this.isModule1Flag = isModule1Flag;
+	public void setModule1Flag(boolean module1Flag) {
+		this.module1Flag = module1Flag;
 	}
 
-	public String getIsModule2Flag() {
-		return isModule2Flag;
+	public boolean isModule2Flag() {
+		return module2Flag;
 	}
 
-	public void setIsModule2Flag(String isModule2Flag) {
-		this.isModule2Flag = isModule2Flag;
+	public void setModule2Flag(boolean module2Flag) {
+		this.module2Flag = module2Flag;
 	}
 
-	public String getIsModule3Flag() {
-		return isModule3Flag;
+	public boolean isModule3Flag() {
+		return module3Flag;
 	}
 
-	public void setIsModule3Flag(String isModule3Flag) {
-		this.isModule3Flag = isModule3Flag;
+	public void setModule3Flag(boolean module3Flag) {
+		this.module3Flag = module3Flag;
 	}
 
-	public String getIsModule4Flag() {
-		return isModule4Flag;
+	public boolean isModule4Flag() {
+		return module4Flag;
 	}
 
-	public void setIsModule4Flag(String isModule4Flag) {
-		this.isModule4Flag = isModule4Flag;
+	public void setModule4Flag(boolean module4Flag) {
+		this.module4Flag = module4Flag;
 	}
 
-	public String getIsModule5Flag() {
-		return isModule5Flag;
+	public boolean isModule5Flag() {
+		return module5Flag;
 	}
 
-	public void setIsModule5Flag(String isModule5Flag) {
-		this.isModule5Flag = isModule5Flag;
+	public void setModule5Flag(boolean module5Flag) {
+		this.module5Flag = module5Flag;
 	}
 
 	public boolean isModule6Flag() {
-		return isModule6Flag;
+		return module6Flag;
 	}
 
-	public void setModule6Flag(boolean isModule6Flag) {
-		this.isModule6Flag = isModule6Flag;
+	public void setModule6Flag(boolean module6Flag) {
+		this.module6Flag = module6Flag;
 	}
 
 	@Override
@@ -229,12 +229,12 @@ public class CompanyDetails implements Serializable {
 		result = prime * result + ((companyProfileImage == null) ? 0 : companyProfileImage.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isCompanyActive == null) ? 0 : isCompanyActive.hashCode());
-		result = prime * result + ((isModule1Flag == null) ? 0 : isModule1Flag.hashCode());
-		result = prime * result + ((isModule2Flag == null) ? 0 : isModule2Flag.hashCode());
-		result = prime * result + ((isModule3Flag == null) ? 0 : isModule3Flag.hashCode());
-		result = prime * result + ((isModule4Flag == null) ? 0 : isModule4Flag.hashCode());
-		result = prime * result + ((isModule5Flag == null) ? 0 : isModule5Flag.hashCode());
-		result = prime * result + (isModule6Flag ? 1231 : 1237);
+		result = prime * result + (module1Flag ? 1231 : 1237);
+		result = prime * result + (module2Flag ? 1231 : 1237);
+		result = prime * result + (module3Flag ? 1231 : 1237);
+		result = prime * result + (module4Flag ? 1231 : 1237);
+		result = prime * result + (module5Flag ? 1231 : 1237);
+		result = prime * result + (module6Flag ? 1231 : 1237);
 		return result;
 	}
 
@@ -312,32 +312,17 @@ public class CompanyDetails implements Serializable {
 				return false;
 		} else if (!isCompanyActive.equals(other.isCompanyActive))
 			return false;
-		if (isModule1Flag == null) {
-			if (other.isModule1Flag != null)
-				return false;
-		} else if (!isModule1Flag.equals(other.isModule1Flag))
+		if (module1Flag != other.module1Flag)
 			return false;
-		if (isModule2Flag == null) {
-			if (other.isModule2Flag != null)
-				return false;
-		} else if (!isModule2Flag.equals(other.isModule2Flag))
+		if (module2Flag != other.module2Flag)
 			return false;
-		if (isModule3Flag == null) {
-			if (other.isModule3Flag != null)
-				return false;
-		} else if (!isModule3Flag.equals(other.isModule3Flag))
+		if (module3Flag != other.module3Flag)
 			return false;
-		if (isModule4Flag == null) {
-			if (other.isModule4Flag != null)
-				return false;
-		} else if (!isModule4Flag.equals(other.isModule4Flag))
+		if (module4Flag != other.module4Flag)
 			return false;
-		if (isModule5Flag == null) {
-			if (other.isModule5Flag != null)
-				return false;
-		} else if (!isModule5Flag.equals(other.isModule5Flag))
+		if (module5Flag != other.module5Flag)
 			return false;
-		if (isModule6Flag != other.isModule6Flag)
+		if (module6Flag != other.module6Flag)
 			return false;
 		return true;
 	}
@@ -349,10 +334,9 @@ public class CompanyDetails implements Serializable {
 				+ ", companyPhoneNo=" + companyPhoneNo + ", companyLogo=" + companyLogo + ", companyProfileImage="
 				+ companyProfileImage + ", isCompanyActive=" + isCompanyActive + ", companyOwnerName="
 				+ companyOwnerName + ", companyOwnerEmail=" + companyOwnerEmail + ", companyOwnerPhoneNo="
-				+ companyOwnerPhoneNo + ", companyOwnerAvatar=" + companyOwnerAvatar + ", isModule1Flag="
-				+ isModule1Flag + ", isModule2Flag=" + isModule2Flag + ", isModule3Flag=" + isModule3Flag
-				+ ", isModule4Flag=" + isModule4Flag + ", isModule5Flag=" + isModule5Flag + ", isModule6Flag="
-				+ isModule6Flag + "]";
+				+ companyOwnerPhoneNo + ", companyOwnerAvatar=" + companyOwnerAvatar + ", module1Flag=" + module1Flag
+				+ ", module2Flag=" + module2Flag + ", module3Flag=" + module3Flag + ", module4Flag=" + module4Flag
+				+ ", module5Flag=" + module5Flag + ", module6Flag=" + module6Flag + "]";
 	}
 
 }
