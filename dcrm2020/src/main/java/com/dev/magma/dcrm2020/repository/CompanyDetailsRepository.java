@@ -9,12 +9,17 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dev.magma.dcrm2020.model.CompanyDetails;
 
 public interface CompanyDetailsRepository extends JpaRepository<CompanyDetails, Long> {
-	@Query("SELECT u FROM CompanyDetails u where u.companyName = :name ")
-	CompanyDetails findCompanyDetailByName(@Param("name") String name);
 
-	
 	@Transactional
 	@Modifying
 	@Query("delete from CompanyDetails u where u.companyName = :name ")
 	void deleteCompanyDetailByName(@Param("name") String name);
+
+	CompanyDetails findCompanyDetailBycompanyName(String companyName);
+
+	@Transactional
+	@Modifying
+	@Query("update CompanyDetails u set u.isCompanyActive = :flag where u.id = :id")
+	int updateComapanyIsActivate(@Param("flag") String flag, Long id);
+
 }
