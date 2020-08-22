@@ -1,12 +1,16 @@
 package com.dev.magma.dcrm2020.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,10 +22,13 @@ public class CompanyDetails implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	@Column(name = "company_name")
+	@Column(name = "company_name", unique = true)
 	private String companyName;
 	@Column(name = "logo_url")
 	private String logo;
+
+	public CompanyDetails() {
+	}
 
 	public Long getId() {
 		return id;
@@ -52,6 +59,7 @@ public class CompanyDetails implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((logo == null) ? 0 : logo.hashCode());
 		return result;
 	}
@@ -70,6 +78,11 @@ public class CompanyDetails implements Serializable {
 				return false;
 		} else if (!companyName.equals(other.companyName))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (logo == null) {
 			if (other.logo != null)
 				return false;
@@ -80,7 +93,7 @@ public class CompanyDetails implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CompanyDetails [companyName=" + companyName + ", logo=" + logo + "]";
+		return "CompanyDetails [id=" + id + ", companyName=" + companyName + ", logo=" + logo + "]";
 	}
 
 }

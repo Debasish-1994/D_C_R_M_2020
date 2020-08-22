@@ -1,9 +1,11 @@
 package com.dev.magma.dcrm2020.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.magma.dcrm2020.model.CompanyDetails;
+import com.dev.magma.dcrm2020.model.ProjectDetails;
 import com.dev.magma.dcrm2020.repository.CompanyDetailsRepository;
 
 @RestController
-@RequestMapping("/admin/v0")
+@RequestMapping("/admin/v0/company")
 public class CompanyController {
 	@Autowired
 	CompanyDetailsRepository companyDetailsRepository;

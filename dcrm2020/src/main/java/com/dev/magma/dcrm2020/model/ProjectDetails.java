@@ -2,11 +2,15 @@ package com.dev.magma.dcrm2020.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,17 +20,20 @@ public class ProjectDetails implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int projectId;
-	@Column(name = "project_name")
+	private Long projectId;
+	@Column(name = "project_name", unique = true, length = 50, updatable = false)
 	private String projectName;
 	@Column(name = "project_desc")
 	private String projectDesc;
 
-	public int getProjectId() {
+	public ProjectDetails() {
+	}
+
+	public Long getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(int projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 
@@ -51,7 +58,7 @@ public class ProjectDetails implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((projectDesc == null) ? 0 : projectDesc.hashCode());
-		result = prime * result + projectId;
+		result = prime * result + ((projectId == null) ? 0 : projectId.hashCode());
 		result = prime * result + ((projectName == null) ? 0 : projectName.hashCode());
 		return result;
 	}
@@ -70,7 +77,10 @@ public class ProjectDetails implements Serializable {
 				return false;
 		} else if (!projectDesc.equals(other.projectDesc))
 			return false;
-		if (projectId != other.projectId)
+		if (projectId == null) {
+			if (other.projectId != null)
+				return false;
+		} else if (!projectId.equals(other.projectId))
 			return false;
 		if (projectName == null) {
 			if (other.projectName != null)
