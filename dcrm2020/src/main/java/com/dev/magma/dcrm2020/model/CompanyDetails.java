@@ -32,8 +32,8 @@ public class CompanyDetails implements Serializable {
 	private String companyLogo;
 	@Column(name = "company_profilepic")
 	private String companyProfileImage;
-	@Column(name = "is_company_active", columnDefinition = "varchar(1) default 'N'")
-	private String isCompanyActive;
+	@Column(name = "is_company_active", columnDefinition = "int default 0")
+	private boolean companyActive;
 
 	@Column(name = "company_ownername")
 	private String companyOwnerName;
@@ -124,12 +124,12 @@ public class CompanyDetails implements Serializable {
 		this.companyProfileImage = companyProfileImage;
 	}
 
-	public String getIsCompanyActive() {
-		return isCompanyActive;
+	public boolean isCompanyActive() {
+		return companyActive;
 	}
 
-	public void setIsCompanyActive(String isCompanyActive) {
-		this.isCompanyActive = isCompanyActive;
+	public void setCompanyActive(boolean companyActive) {
+		this.companyActive = companyActive;
 	}
 
 	public String getCompanyOwnerName() {
@@ -216,6 +216,7 @@ public class CompanyDetails implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (companyActive ? 1231 : 1237);
 		result = prime * result + ((companyDesc == null) ? 0 : companyDesc.hashCode());
 		result = prime * result + ((companyEmail == null) ? 0 : companyEmail.hashCode());
 		result = prime * result + ((companyLogo == null) ? 0 : companyLogo.hashCode());
@@ -228,7 +229,6 @@ public class CompanyDetails implements Serializable {
 		result = prime * result + ((companyPhoneNo == null) ? 0 : companyPhoneNo.hashCode());
 		result = prime * result + ((companyProfileImage == null) ? 0 : companyProfileImage.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((isCompanyActive == null) ? 0 : isCompanyActive.hashCode());
 		result = prime * result + (module1Flag ? 1231 : 1237);
 		result = prime * result + (module2Flag ? 1231 : 1237);
 		result = prime * result + (module3Flag ? 1231 : 1237);
@@ -247,6 +247,8 @@ public class CompanyDetails implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		CompanyDetails other = (CompanyDetails) obj;
+		if (companyActive != other.companyActive)
+			return false;
 		if (companyDesc == null) {
 			if (other.companyDesc != null)
 				return false;
@@ -307,11 +309,6 @@ public class CompanyDetails implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (isCompanyActive == null) {
-			if (other.isCompanyActive != null)
-				return false;
-		} else if (!isCompanyActive.equals(other.isCompanyActive))
-			return false;
 		if (module1Flag != other.module1Flag)
 			return false;
 		if (module2Flag != other.module2Flag)
@@ -332,11 +329,11 @@ public class CompanyDetails implements Serializable {
 		return "CompanyDetails [id=" + id + ", companyName=" + companyName + ", companyDesc=" + companyDesc
 				+ ", companyManagementName=" + companyManagementName + ", companyEmail=" + companyEmail
 				+ ", companyPhoneNo=" + companyPhoneNo + ", companyLogo=" + companyLogo + ", companyProfileImage="
-				+ companyProfileImage + ", isCompanyActive=" + isCompanyActive + ", companyOwnerName="
-				+ companyOwnerName + ", companyOwnerEmail=" + companyOwnerEmail + ", companyOwnerPhoneNo="
-				+ companyOwnerPhoneNo + ", companyOwnerAvatar=" + companyOwnerAvatar + ", module1Flag=" + module1Flag
-				+ ", module2Flag=" + module2Flag + ", module3Flag=" + module3Flag + ", module4Flag=" + module4Flag
-				+ ", module5Flag=" + module5Flag + ", module6Flag=" + module6Flag + "]";
+				+ companyProfileImage + ", companyActive=" + companyActive + ", companyOwnerName=" + companyOwnerName
+				+ ", companyOwnerEmail=" + companyOwnerEmail + ", companyOwnerPhoneNo=" + companyOwnerPhoneNo
+				+ ", companyOwnerAvatar=" + companyOwnerAvatar + ", module1Flag=" + module1Flag + ", module2Flag="
+				+ module2Flag + ", module3Flag=" + module3Flag + ", module4Flag=" + module4Flag + ", module5Flag="
+				+ module5Flag + ", module6Flag=" + module6Flag + "]";
 	}
 
 }
