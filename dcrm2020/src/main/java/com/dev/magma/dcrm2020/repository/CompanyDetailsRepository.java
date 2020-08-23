@@ -29,4 +29,24 @@ public interface CompanyDetailsRepository extends JpaRepository<CompanyDetails, 
 	@Query("update CompanyDetails u set u.module1Flag = :flag where u.id IN (:id)")
 	int updateAllCompanyFlagsForModule1Flag(@Param("flag") boolean flag, @Param("id") List<Long> id);
 
+	@Modifying
+	@Query("update CompanyDetails u set u.module2Flag = :flag where u.id IN (:id)")
+	void updateAllCompanyFlagsForModule2Flag(boolean flag, List<Long> id);
+
+	@Modifying
+	@Query("update CompanyDetails u set u.module3Flag = :flag where u.id IN (:id)")
+	void updateAllCompanyFlagsForModule3Flag(boolean flag, List<Long> id);
+
+	@Modifying
+	@Query("update CompanyDetails u set u.module4Flag = :flag where u.id IN (:id)")
+	void updateAllCompanyFlagsForModule4Flag(boolean flag, List<Long> id);
+
+	@Modifying
+	@Query("update CompanyDetails u set u.module5Flag = :flag where u.id IN (:id)")
+	void updateAllCompanyFlagsForModule5Flag(boolean flag, List<Long> id);
+
+	@Modifying
+	@Query("update CompanyDetails u set u.module6Flag = :flag where u.id IN (:id)")
+	void updateAllCompanyFlagsForModule6Flag(boolean flag, List<Long> id);
+
 }

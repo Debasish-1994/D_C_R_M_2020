@@ -1,12 +1,12 @@
 package com.dev.magma.dcrm2020.controller;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,12 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dev.magma.dcrm2020.model.CompanyDetails;
 import com.dev.magma.dcrm2020.model.ProjectDetails;
 import com.dev.magma.dcrm2020.repository.CompanyDetailsRepository;
+import com.dev.magma.dcrm2020.repository.ProjectDetailsRepository;
 
 @RestController
 @RequestMapping("/admin/v0/company")
 public class CompanyDetailsController {
 	@Autowired
 	CompanyDetailsRepository companyDetailsRepository;
+	@Autowired
+	ProjectDetailsRepository projectDetailsRepository;
 
 	// create
 	@RequestMapping(value = "/addcompanydetails", method = RequestMethod.POST)
@@ -34,8 +37,81 @@ public class CompanyDetailsController {
 
 	// read
 	@RequestMapping(value = "/getcompanydetails", method = RequestMethod.POST)
-	public List<CompanyDetails> getCompanyDetails() {
-		return companyDetailsRepository.findAll();
+	public List<Object> getCompanyDetails() {
+		boolean flag1;
+		boolean flag2;
+		boolean flag3;
+		boolean flag4;
+		boolean flag5;
+		boolean flag6;
+
+		JSONObject fetchCompanyDetail = null;
+		JSONObject addProductDetail = null;
+		JSONArray addProductDetailArray = null;
+		JSONArray companyDetailsArray_new = null;
+
+		List<CompanyDetails> companyDetails = companyDetailsRepository.findAll();
+		System.out.println(companyDetails.size());
+		List<ProjectDetails> projectDetails = projectDetailsRepository.findAll();
+		System.out.println(projectDetails.size());
+
+		JSONArray companyDetailsArray = new JSONArray(companyDetails);
+		JSONArray projectDetailsArray = new JSONArray(projectDetails);
+		System.out.println(companyDetailsArray + "--" + projectDetailsArray);
+		if (companyDetailsArray.length() != 0 && companyDetailsArray != null) {
+			companyDetailsArray_new = new JSONArray();
+			for (int i = 0; i < companyDetailsArray.length(); i++) {
+				addProductDetailArray = new JSONArray();
+				fetchCompanyDetail = (JSONObject) companyDetailsArray.get(i);
+				flag1 = fetchCompanyDetail.getBoolean("module1Flag");
+				flag2 = fetchCompanyDetail.getBoolean("module2Flag");
+				flag3 = fetchCompanyDetail.getBoolean("module3Flag");
+				flag4 = fetchCompanyDetail.getBoolean("module4Flag");
+				flag5 = fetchCompanyDetail.getBoolean("module5Flag");
+				flag6 = fetchCompanyDetail.getBoolean("module6Flag");
+
+				if (flag1 == true) {
+					addProductDetail = (JSONObject) projectDetailsArray.get(0);
+					addProductDetailArray.put(addProductDetail);
+				}
+				if (flag2 == true) {
+					addProductDetail = (JSONObject) projectDetailsArray.get(1);
+					addProductDetailArray.put(addProductDetail);
+				}
+				if (flag3 == true) {
+					addProductDetail = (JSONObject) projectDetailsArray.get(2);
+					addProductDetailArray.put(addProductDetail);
+				}
+				if (flag4 == true) {
+					addProductDetail = (JSONObject) projectDetailsArray.get(3);
+					addProductDetailArray.put(addProductDetail);
+				}
+				if (flag5 == true) {
+					addProductDetail = (JSONObject) projectDetailsArray.get(4);
+					addProductDetailArray.put(addProductDetail);
+				}
+				if (flag6 == true) {
+					addProductDetail = (JSONObject) projectDetailsArray.get(5);
+					addProductDetailArray.put(addProductDetail);
+				}
+
+				if (flag1 == false && flag2 == false && flag3 == false && flag4 == false && flag5 == false
+						&& flag6 == false) {
+					addProductDetail = new JSONObject();
+					addProductDetail.put("projectName", "99");
+					addProductDetail.put("projectDesc", "no modules found for the company");
+					addProductDetailArray.put(addProductDetail);
+				}
+				fetchCompanyDetail.put("productDetails", addProductDetailArray);
+				companyDetailsArray_new.put(fetchCompanyDetail);
+			}
+
+		} else {
+			companyDetailsArray_new = new JSONArray();
+			companyDetailsArray_new.put(false);
+		}
+
+		return companyDetailsArray_new.toList();
 	}
 
 	// read

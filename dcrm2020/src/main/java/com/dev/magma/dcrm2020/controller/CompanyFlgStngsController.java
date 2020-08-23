@@ -36,4 +36,29 @@ public class CompanyFlgStngsController {
 		companyDetailsRepository.updateAllCompanyFlagsForModule1Flag(flag, id);
 	}
 
+	@RequestMapping(value = "/updatemodule2flag", method = RequestMethod.POST)
+	public void updateModule2Flag(@RequestParam boolean flag, @RequestParam List<Long> id) {
+		companyDetailsRepository.updateAllCompanyFlagsForModule2Flag(flag, id);
+	}
+
+	@RequestMapping(value = "/updatemodule3flag", method = RequestMethod.POST)
+	public void updateModule3Flag(@RequestParam boolean flag, @RequestParam List<Long> id) {
+		companyDetailsRepository.updateAllCompanyFlagsForModule3Flag(flag, id);
+	}
+
+	@RequestMapping(value = "/updatemodule4flag", method = RequestMethod.POST)
+	public void updateModule4Flag(@RequestParam boolean flag, @RequestParam List<Long> id) {
+		companyDetailsRepository.updateAllCompanyFlagsForModule4Flag(flag, id);
+	}
+
+	@RequestMapping(value = "/updatemodule5flag", method = RequestMethod.POST)
+	public void updateModule5Flag(@RequestParam boolean flag, @RequestParam List<Long> id) {
+		companyDetailsRepository.updateAllCompanyFlagsForModule5Flag(flag, id);
+	}
+
+	@RequestMapping(value = "/updatemodule6flag", method = RequestMethod.POST)
+	public void updateModule6Flag(@RequestParam boolean flag, @RequestParam List<Long> id) {
+		companyDetailsRepository.updateAllCompanyFlagsForModule6Flag(flag, id);
+	}
+
 }
